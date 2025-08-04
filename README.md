@@ -30,8 +30,14 @@ ClickMorale is a fun and interactive quiz web application designed to help users
 ### 🏠 Home Screen  
 ![Home Screen](https://github.com/user-attachments/assets/efe59455-5b88-4dde-a88f-9aefa50ad35e)
 
-### ❓ Quiz Screen  
-![Quiz Screen](https://your-link-to-quiz-image.com/quiz.png)
+### ❓ Quiz Instruction Screen  
+![Quiz Instruction Screen](https://github.com/user-attachments/assets/7cc942d7-a77b-4752-9f73-21db3336f976)
+
+### ❓ Quiz Screen
+![Quiz Screen](https://github.com/user-attachments/assets/aa665a5e-8b51-427b-b230-7644dfeecac9)
+
+### ❓ Result Screen
+![Result Screen](https://github.com/user-attachments/assets/3242636c-5fe8-4d74-b938-8d537726b217)
 
 ---
 
