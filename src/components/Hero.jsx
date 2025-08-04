@@ -87,7 +87,6 @@ const Hero = ({ setLoading }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          ClickMorale
         </motion.h1>
 
         <motion.h2
