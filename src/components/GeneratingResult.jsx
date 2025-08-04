@@ -69,7 +69,7 @@ const GeneratingResult = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 1, 0], transition: { repeat: Infinity, duration: 2 } }}
       >
-        Sharpening the pencils 📝, tuning the questions 🎯, and testing your brain 🧠...
+        Crunching your answers 🤓, decoding your vibes 🎭, and revealing your inner social spark ✨...
       </motion.div>
 
       <motion.div
@@ -85,7 +85,7 @@ const GeneratingResult = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
       >
-        Get ready to show your social skills!
+        Let’s see how socially sharp you really are! 🧠🎯
       </motion.div>
     </div>
   );

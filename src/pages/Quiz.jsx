@@ -9,139 +9,140 @@ const originalQuestions = [
   {
     text: "🤔 How do you usually spend your weekends?",
     options: [
-      "📚 Reading or watching alone",
-      "🧑‍🤝‍🧑 Hanging with close friends",
-      "🎉 Parties & meeting people",
-      "🎲 Depends on the mood",
+      { text: "📚 Reading or watching alone", type: "introvert" },
+      { text: "🧑‍🤝‍🧑 Hanging with close friends", type: "extrovert" },
+      { text: "🎉 Parties & meeting people", type: "extrovert" },
+      { text: "🎲 Depends on the mood", type: "ambivert" },
     ],
   },
   {
     text: "🧑‍💼 What do you prefer during a group activity?",
     options: [
-      "🌟 Observing and planning",
-      "🤝 Supporting the team",
-      "🎤 Leading and speaking",
-      "🎭 Going with the flow",
+      { text: "🌟 Observing and planning", type: "introvert" },
+      { text: "🤝 Supporting the team", type: "ambivert" },
+      { text: "🎤 Leading and speaking", type: "extrovert" },
+      { text: "🎭 Going with the flow", type: "ambivert" },
     ],
   },
   {
     text: "📱 Your phone rings. What's your reaction?",
     options: [
-      "😬 Ignore and text later",
-      "💬 Pick up if it’s a friend",
-      "📞 Answer immediately",
-      "🤷 Depends on who's calling",
+      { text: "😬 Ignore and text later", type: "introvert" },
+      { text: "💬 Pick up if it’s a friend", type: "ambivert" },
+      { text: "📞 Answer immediately", type: "extrovert" },
+      { text: "🤷 Depends on who's calling", type: "ambivert" },
     ],
   },
   {
     text: "🧩 Which best describes you?",
     options: [
-      "🧘 Calm and quiet",
-      "😌 Balanced and thoughtful",
-      "🔥 Energetic and bold",
-      "🌊 Adaptive and mixed",
+      { text: "🧘 Calm and quiet", type: "introvert" },
+      { text: "😌 Balanced and thoughtful", type: "ambivert" },
+      { text: "🔥 Energetic and bold", type: "extrovert" },
+      { text: "🌊 Adaptive and mixed", type: "ambivert" },
     ],
   },
   {
     text: "🎓 In school, you were known as...",
     options: [
-      "📖 The quiet achiever",
-      "😄 Friendly and helpful",
-      "🎬 Loud and confident",
-      "🎭 All of the above",
+      { text: "📖 The quiet achiever", type: "introvert" },
+      { text: "😄 Friendly and helpful", type: "ambivert" },
+      { text: "🎬 Loud and confident", type: "extrovert" },
+      { text: "🎭 All of the above", type: "ambivert" },
     ],
   },
   {
     text: "☕ Your perfect break is...",
     options: [
-      "📺 A cozy solo Netflix binge",
-      "🧑‍🤝‍🧑 Chat with a close friend",
-      "🎊 Dancing or socializing",
-      "🌀 Just chill, whatever happens",
+      { text: "📺 A cozy solo Netflix binge", type: "introvert" },
+      { text: "🧑‍🤝‍🧑 Chat with a close friend", type: "ambivert" },
+      { text: "🎊 Dancing or socializing", type: "extrovert" },
+      { text: "🌀 Just chill, whatever happens", type: "ambivert" },
     ],
   },
   {
     text: "🌐 In online meetings, you're most likely to...",
     options: [
-      "👀 Stay muted and listen",
-      "💡 Add a few helpful ideas",
-      "🎙️ Be the main speaker",
-      "🌀 Switch roles depending",
+      { text: "👀 Stay muted and listen", type: "introvert" },
+      { text: "💡 Add a few helpful ideas", type: "ambivert" },
+      { text: "🎙️ Be the main speaker", type: "extrovert" },
+      { text: "🌀 Switch roles depending", type: "ambivert" },
     ],
   },
   {
     text: "🎮 Pick a game style you vibe with:",
     options: [
-      "🧩 Puzzle and solo games",
-      "👯 Co-op and team games",
-      "⚔️ Competitive and fast",
-      "🎲 Random fun games",
+      { text: "🧩 Puzzle and solo games", type: "introvert" },
+      { text: "👯 Co-op and team games", type: "ambivert" },
+      { text: "⚔️ Competitive and fast", type: "extrovert" },
+      { text: "🎲 Random fun games", type: "ambivert" },
     ],
   },
   {
     text: "🎤 How do you feel about public speaking?",
     options: [
-      "😰 Please no!",
-      "😅 I can if I must",
-      "😎 Love the spotlight!",
-      "🤔 Depends on the topic",
+      { text: "😰 Please no!", type: "introvert" },
+      { text: "😅 I can if I must", type: "ambivert" },
+      { text: "😎 Love the spotlight!", type: "extrovert" },
+      { text: "🤔 Depends on the topic", type: "ambivert" },
     ],
   },
   {
     text: "🎯 What motivates your decisions?",
     options: [
-      "🔍 Deep thinking",
-      "❤️ People’s feelings",
-      "🏆 Ambition",
-      "🎲 A mix of everything",
+      { text: "🔍 Deep thinking", type: "introvert" },
+      { text: "❤️ People’s feelings", type: "ambivert" },
+      { text: "🏆 Ambition", type: "extrovert" },
+      { text: "🎲 A mix of everything", type: "ambivert" },
     ],
   },
   {
     text: "🌅 What’s your favorite time of day?",
     options: [
-      "🌃 Late night solitude",
-      "🌄 Early morning peace",
-      "☀️ Busy, bright afternoon",
-      "🌆 Twilight mood zone",
+      { text: "🌃 Late night solitude", type: "introvert" },
+      { text: "🌄 Early morning peace", type: "ambivert" },
+      { text: "☀️ Busy, bright afternoon", type: "extrovert" },
+      { text: "🌆 Twilight mood zone", type: "ambivert" },
     ],
   },
   {
     text: "✈️ Vacation goal?",
     options: [
-      "📚 Explore museums quietly",
-      "🏞️ Hike with a buddy",
-      "🎉 Big cities and nightlife",
-      "🌀 Go where the wind blows",
+      { text: "📚 Explore museums quietly", type: "introvert" },
+      { text: "🏞️ Hike with a buddy", type: "ambivert" },
+      { text: "🎉 Big cities and nightlife", type: "extrovert" },
+      { text: "🌀 Go where the wind blows", type: "ambivert" },
     ],
   },
   {
     text: "📖 When learning something new, you...",
     options: [
-      "🧠 Dive deep alone",
-      "👯‍♀️ Join a study group",
-      "🎤 Present & explain to others",
-      "🎲 Mix methods every time",
+      { text: "🧠 Dive deep alone", type: "introvert" },
+      { text: "👯‍♀️ Join a study group", type: "ambivert" },
+      { text: "🎤 Present & explain to others", type: "extrovert" },
+      { text: "🎲 Mix methods every time", type: "ambivert" },
     ],
   },
   {
     text: "🗣️ How do you process emotions?",
     options: [
-      "📝 Journal or reflect",
-      "🧑‍🤝‍🧑 Talk with someone",
-      "🎧 Music or expression",
-      "🌀 Varies each time",
+      { text: "📝 Journal or reflect", type: "introvert" },
+      { text: "🧑‍🤝‍🧑 Talk with someone", type: "ambivert" },
+      { text: "🎧 Music or expression", type: "extrovert" },
+      { text: "🌀 Varies each time", type: "ambivert" },
     ],
   },
   {
     text: "🧠 What’s your thinking style?",
     options: [
-      "🔬 Analytical",
-      "🤝 Empathetic",
-      "🚀 Bold & instinctive",
-      "🌪️ Hybrid & flexible",
+      { text: "🔬 Analytical", type: "introvert" },
+      { text: "🤝 Empathetic", type: "ambivert" },
+      { text: "🚀 Bold & instinctive", type: "extrovert" },
+      { text: "🌪️ Hybrid & flexible", type: "ambivert" },
     ],
   },
 ];
+
 
 const STORAGE_KEY = "clickmorale-quiz-progress";
 const ANSWERS_KEY = "clickmorale-quiz-answers";
@@ -191,8 +192,13 @@ const Quiz = () => {
       id: Date.now(),
     });
 
+    const selectedOption = questions[currentIndex].options[index];
     const newAnswers = [...answers];
-    newAnswers[currentIndex] = questions[currentIndex].options[index];
+    newAnswers[currentIndex] = {
+      question: questions[currentIndex].text,
+      answer: selectedOption.text,
+      type: selectedOption.type,
+    };
     setAnswers(newAnswers);
     localStorage.setItem(ANSWERS_KEY, JSON.stringify(newAnswers));
 
@@ -256,6 +262,33 @@ const Quiz = () => {
           colors={["#00FFC2", "#8E2DE2", "#FF61D2", "#FEC260", "#ffffff"]}
         />
       )}
+    {/* Floating animated emojis */}
+    <div className="absolute inset-0 z-0 pointer-events-none text-[3.5rem] opacity-20 select-none">
+        {[
+          { x: "left-[10%]", y: "top-[10%]", icon: "❓" },
+          { x: "right-[12%]", y: "top-[25%]", icon: "💡" },
+          { x: "left-[20%]", y: "bottom-[20%]", icon: "🧠" },
+          { x: "right-[24%]", y: "bottom-[15%]", icon: "🎲" },
+          { x: "left-[50%]", y: "top-[15%]", icon: "📊" },
+          { x: "left-[6%]", y: "top-[50%]", icon: "🗣️" },
+          { x: "right-[5%]", y: "bottom-[35%]", icon: "🧩" },
+          { x: "left-[45%]", y: "bottom-[10%]", icon: "🤔" },
+          { x: "right-[35%]", y: "top-[40%]", icon: "🎯" },
+        ].map((item, i) => (
+          <motion.span
+            key={i}
+            className={`absolute ${item.x} ${item.y}`}
+            animate={{ y: [0, -25, 0] }}
+            transition={{
+              duration: 6 + i,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            {item.icon}
+          </motion.span>
+        ))}
+      </div>
 
       {/* 🎉 Quiz Completed UI */}
       {completed ? (
@@ -335,7 +368,7 @@ const Quiz = () => {
                       : "bg-white/10 hover:bg-white/20"
                   }`}
                 >
-                  {opt}
+                  {opt.text}
                 </motion.button>
               ))}
             </div>

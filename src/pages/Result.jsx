@@ -21,19 +21,22 @@ const Result = () => {
     setAnswers(savedAnswers);
 
     if (savedAnswers.length) {
-      const introvertScore = savedAnswers.filter((a) =>
-        a.includes("📚") || a.includes("🛋️") || a.includes("😌")
-      ).length;
-      const extrovertScore = savedAnswers.filter((a) =>
-        a.includes("🧑‍🤝‍🧑") || a.includes("🎉") || a.includes("🎤")
-      ).length;
+      let introvertScore = 0;
+      let extrovertScore = 0;
+      let ambivertScore = 0;
 
-      if (introvertScore > extrovertScore + 2) {
+      savedAnswers.forEach((answer) => {
+        if (answer.type === "introvert") introvertScore++;
+        else if (answer.type === "extrovert") extrovertScore++;
+        else if (answer.type === "ambivert") ambivertScore++;
+      });
+
+      if (introvertScore > extrovertScore && introvertScore > ambivertScore) {
         setPersonalityType("Introvert");
         setResultSummary(
           "You enjoy your own company and value peace, deep conversations, and solo adventures."
         );
-      } else if (extrovertScore > introvertScore + 2) {
+      } else if (extrovertScore > introvertScore && extrovertScore > ambivertScore) {
         setPersonalityType("Extrovert");
         setResultSummary(
           "You're energized by people, love to socialize, and thrive in group activities!"
@@ -141,7 +144,7 @@ const Result = () => {
           {questions.map((q, index) => (
             <li key={index}>
               <p className="font-semibold text-gray-800">Q{index + 1}: {q.text}</p>
-              <p className="text-purple-700 ml-2">👉 {answers[index]}</p>
+              <p className="text-purple-700 ml-2">👉 {answers[index]?.answer}</p>
             </li>
           ))}
             </ul>
