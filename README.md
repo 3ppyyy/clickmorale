@@ -41,6 +41,11 @@ ClickMorale is a fun and interactive quiz web application designed to help users
 
 ---
 
+## 👨‍💻 Author
+
+**John Alexis Manansala**  
+[GitHub](https://github.com/3ppyyy) | [Email](mailto:umali.johnalexis@gmail.com)
+
 ## 📂 How to Run Locally
 
 ```bash
@@ -49,8 +54,4 @@ cd clickmorale
 npm install
 npm run dev
 
-## 👨‍💻 Author
-
-**John Alexis Manansala**  
-[GitHub](https://github.com/3ppyyy) | [Email](mailto:umali.johnalexis@gmail.com)
 
