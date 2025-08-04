@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom"; // if using react-router
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate(); // for programmatic navigation
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -11,6 +13,11 @@ const Navbar = () => {
     { name: "About", id: "about" },
     { name: "Videos", id: "videos" },
   ];
+
+  const handleStartQuiz = () => {
+    setIsMenuOpen(false);
+    navigate("/instruction"); // adjust the route based on your routing setup
+  };
 
   return (
     <motion.nav
@@ -40,22 +47,33 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-6 text-sm sm:text-base font-semibold">
-          {menuItems.map((item) => (
-            <motion.li
-              key={item.name}
-              whileHover={{ scale: 1.15 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <a
-                href={`#${item.id}`}
-                className="hover:text-[#FEE440] transition duration-300 ease-in-out"
+        <div className="hidden md:flex items-center space-x-6">
+          <ul className="flex space-x-6 text-sm sm:text-base font-semibold">
+            {menuItems.map((item) => (
+              <motion.li
+                key={item.name}
+                whileHover={{ scale: 1.15 }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
-                {item.name}
-              </a>
-            </motion.li>
-          ))}
-        </ul>
+                <a
+                  href={`#${item.id}`}
+                  className="hover:text-[#FEE440] transition duration-300 ease-in-out"
+                >
+                  {item.name}
+                </a>
+              </motion.li>
+            ))}
+          </ul>
+
+          {/* Start Quiz Button */}
+          <motion.button
+            onClick={handleStartQuiz}
+            whileHover={{ scale: 1.05 }}
+            className="ml-4 bg-yellow-400 text-black font-bold px-4 py-2 rounded-full shadow hover:bg-yellow-300 transition"
+          >
+            🎮 Start Quiz
+          </motion.button>
+        </div>
 
         {/* Fun Tagline */}
         <div className="hidden md:flex items-center">
@@ -108,6 +126,15 @@ const Navbar = () => {
                   </a>
                 </li>
               ))}
+              {/* Start Quiz Button for Mobile */}
+              <li>
+                <button
+                  onClick={handleStartQuiz}
+                  className="mt-2 bg-yellow-400 text-black font-bold px-6 py-2 rounded-full shadow hover:bg-yellow-300 transition"
+                >
+                  🎮 Start Quiz
+                </button>
+              </li>
             </ul>
           </motion.div>
         )}
