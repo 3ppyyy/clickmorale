@@ -116,7 +116,7 @@ const Result = () => {
           {showConfetti && <Confetti width={width} height={height} />}
         </div>
 
-        <div className="pt-5 relative z-10 flex flex-col items-center justify-center min-h-screen pt-24 pb-12">
+        <div className="pt-30 relative z-10 flex flex-col items-center justify-center min-h-screen pt-24 pb-12">
           <motion.h1
             className="text-4xl sm:text-5xl font-bold mb-6 text-pink-600 text-center"
             initial={{ scale: 0.8, opacity: 0 }}
@@ -124,7 +124,7 @@ const Result = () => {
             transition={{ duration: 0.6 }}
           >
             🎉 Your Personality Result: <br />
-            <span className="text-purple-700 mt-10">{personalityType}</span>
+            <span className="text-purple-700">{personalityType}</span>
           </motion.h1>
 
           <motion.p
