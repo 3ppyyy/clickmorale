@@ -48,3 +48,9 @@ git clone https://github.com/3ppyyy/clickmorale.git
 cd clickmorale
 npm install
 npm run dev
+
+## 👨‍💻 Author
+
+**John Alexis Manansala**  
+[GitHub](https://github.com/3ppyyy) | [Email](mailto:umali.johnalexis@gmail.com)
+
