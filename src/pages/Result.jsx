@@ -70,6 +70,9 @@ const Result = () => {
     }
   };
 
+  const shareText = `I just found out I'm an ${personalityType} on ClickMorale! 🧠🎯 Try the quiz: https://clickmorale.netlify.app`;
+
+
   return (
     <div style={{ position: "relative", minHeight: "100vh" }}>
       <div
@@ -132,6 +135,40 @@ const Result = () => {
           >
             {resultSummary}
           </motion.p>
+
+          {/* Share Buttons */}
+          <motion.div
+            className="flex flex-wrap justify-center gap-4 mb-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            <a
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full font-semibold shadow"
+            >
+              🐦 Share on Twitter
+            </a>
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=https://clickmorale.netlify.app`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-full font-semibold shadow"
+            >
+              📘 Share on Facebook
+            </a>
+            <a
+              href={`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full font-semibold shadow"
+            >
+              📲 Share on WhatsApp
+            </a>
+          </motion.div>
+
 
           <motion.div
             className="text-left w-full max-w-xl p-6 bg-white rounded-2xl shadow-xl border border-pink-200 mb-10 overflow-y-auto max-h-[300px] sm:max-h-[400px] scroll-smooth"
