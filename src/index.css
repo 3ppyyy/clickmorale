@@ -1,8 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
 
 body {
   margin: 0;
@@ -18,18 +24,15 @@ body {
     );
   background-blend-mode: lighten;
   background-size: cover;
+  font-size: clamp(14px, 4vw, 18px);
+  overflow-x: hidden;
 }
-
-html {
-  scroll-behavior: smooth;
-}
-
-
 
 .font-game {
   font-family: 'Fredoka', sans-serif;
 }
 
+/* Loader Animation */
 .loader {
   position: absolute;
   top: calc(50% - 1.25em);
@@ -41,7 +44,8 @@ html {
   background: transparent;
 }
 
-.loader:before, .loader:after {
+.loader:before,
+.loader:after {
   content: "";
   position: absolute;
   top: 50%;
@@ -97,3 +101,60 @@ html {
   }
 }
 
+/* 📱 Mobile Optimizations */
+@media (max-width: 640px) {
+  body {
+    background:
+      linear-gradient(to bottom, #ffffff, #f8f9fa);
+    background-blend-mode: normal;
+  }
+
+  .loader {
+    top: calc(50% - 0.75em);
+    left: calc(50% - 0.75em);
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  .loader:before,
+  .loader:after {
+    width: 0.3em;
+    height: 0.3em;
+  }
+
+  @keyframes before8 {
+    0% {
+      width: 0.3em;
+      box-shadow: 0.8em -0.3em rgba(225, 20, 98, 0.75), -0.8em 0.3em rgba(111, 202, 220, 0.75);
+    }
+    35% {
+      width: 1.5em;
+      box-shadow: 0 -0.3em rgba(225, 20, 98, 0.75), 0 0.3em rgba(111, 202, 220, 0.75);
+    }
+    70% {
+      width: 0.3em;
+      box-shadow: -0.8em -0.3em rgba(225, 20, 98, 0.75), 0.8em 0.3em rgba(111, 202, 220, 0.75);
+    }
+    100% {
+      box-shadow: 0.8em -0.3em rgba(225, 20, 98, 0.75), -0.8em 0.3em rgba(111, 202, 220, 0.75);
+    }
+  }
+
+  @keyframes after6 {
+    0% {
+      height: 0.3em;
+      box-shadow: 0.3em 0.8em rgba(61, 184, 143, 0.75), -0.3em -0.8em rgba(233, 169, 32, 0.75);
+    }
+    35% {
+      height: 1.5em;
+      box-shadow: 0.3em 0 rgba(61, 184, 143, 0.75), -0.3em 0 rgba(233, 169, 32, 0.75);
+    }
+    70% {
+      height: 0.3em;
+      box-shadow: 0.3em -0.8em rgba(61, 184, 143, 0.75), -0.3em 0.8em rgba(233, 169, 32, 0.75);
+    }
+    100% {
+      box-shadow: 0.3em 0.8em rgba(61, 184, 143, 0.75), -0.3em -0.8em rgba(233, 169, 32, 0.75);
+    }
+  }
+}

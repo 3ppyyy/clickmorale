@@ -143,7 +143,6 @@ const originalQuestions = [
   },
 ];
 
-
 const STORAGE_KEY = "clickmorale-quiz-progress";
 const ANSWERS_KEY = "clickmorale-quiz-answers";
 const QUESTIONS_KEY = "clickmorale-quiz-questions";
@@ -174,10 +173,20 @@ const Quiz = () => {
     return saved ? JSON.parse(saved) : [];
   });
   const [completed, setCompleted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const savedIndex = localStorage.getItem(STORAGE_KEY);
     if (savedIndex) setCurrentIndex(parseInt(savedIndex));
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const currentQuestion = questions[currentIndex];
@@ -262,8 +271,8 @@ const Quiz = () => {
           colors={["#00FFC2", "#8E2DE2", "#FF61D2", "#FEC260", "#ffffff"]}
         />
       )}
-    {/* Floating animated emojis */}
-    <div className="absolute inset-0 z-0 pointer-events-none text-[3.5rem] opacity-20 select-none">
+      {/* Floating animated emojis */}
+      <div className="absolute inset-0 z-0 pointer-events-none text-[3.5rem] opacity-20 select-none">
         {[
           { x: "left-[10%]", y: "top-[10%]", icon: "❓" },
           { x: "right-[12%]", y: "top-[25%]", icon: "💡" },
@@ -278,12 +287,12 @@ const Quiz = () => {
           <motion.span
             key={i}
             className={`absolute ${item.x} ${item.y}`}
-            animate={{ y: [0, -25, 0] }}
-            transition={{
+            animate={!isMobile ? { y: [0, -25, 0] } : {}}
+            transition={!isMobile ? {
               duration: 6 + i,
               repeat: Infinity,
               ease: "easeInOut",
-            }}
+            } : {}}
           >
             {item.icon}
           </motion.span>
@@ -293,8 +302,8 @@ const Quiz = () => {
       {/* 🎉 Quiz Completed UI */}
       {completed ? (
         <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
+          initial={!isMobile ? { scale: 0.8, opacity: 0 } : {}}
+          animate={!isMobile ? { scale: 1, opacity: 1 } : { opacity: 1 }}
           className="bg-white/10 p-10 rounded-3xl border border-white/20 shadow-2xl backdrop-blur-lg text-center max-w-xl"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-pink-400 mb-4">🎉 Congrats!</h2>
@@ -302,10 +311,10 @@ const Quiz = () => {
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <button
               onClick={() => {
-                  if (window.confirm("Are you sure you want to restart the quiz?")) {
-                    restartQuiz();
-                  }
-                }}
+                if (window.confirm("Are you sure you want to restart the quiz?")) {
+                  restartQuiz();
+                }
+              }}
               className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-full transition"
             >
               🔄 Restart Quiz
@@ -322,10 +331,10 @@ const Quiz = () => {
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -40 }}
-            transition={{ duration: 0.5 }}
+            initial={!isMobile ? { opacity: 0, y: 40 } : {}}
+            animate={!isMobile ? { opacity: 1, y: 0 } : { opacity: 1 }}
+            exit={!isMobile ? { opacity: 0, y: -40 } : {}}
+            transition={!isMobile ? { duration: 0.5 } : {}}
             className="relative w-full max-w-3xl bg-white/5 p-8 rounded-3xl shadow-2xl border border-white/10 backdrop-blur-md"
           >
             {/* Top Bar */}
@@ -348,8 +357,8 @@ const Quiz = () => {
             {/* Question */}
             <motion.h2
               className="text-2xl md:text-3xl font-bold text-center mb-8"
-              animate={{ scale: [1, 1.03, 1] }}
-              transition={{ repeat: Infinity, duration: 2 }}
+              animate={!isMobile ? { scale: [1, 1.03, 1] } : {}}
+              transition={!isMobile ? { repeat: Infinity, duration: 2 } : {}}
             >
               {currentQuestion.text}
             </motion.h2>
@@ -360,8 +369,8 @@ const Quiz = () => {
                 <motion.button
                   key={idx}
                   onClick={(e) => handleAnswer(idx, e)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.9, rotate: 1 }}
+                  whileHover={!isMobile ? { scale: 1.05 } : {}}
+                  whileTap={!isMobile ? { scale: 0.9, rotate: 1 } : {}}
                   className={`w-full px-6 py-4 rounded-2xl border border-white/10 font-medium text-left transition-all duration-300 relative ${
                     selected === idx
                       ? "bg-green-500 text-white shadow-lg"
@@ -381,11 +390,11 @@ const Quiz = () => {
         <div className="w-full max-w-3xl h-3 bg-white/10 rounded-full mt-10 overflow-hidden">
           <motion.div
             className="h-full bg-pink-500"
-            initial={{ width: 0 }}
+            initial={!isMobile ? { width: 0 } : {}}
             animate={{
               width: `${((currentIndex + 1) / questions.length) * 100}%`,
             }}
-            transition={{ duration: 0.6 }}
+            transition={!isMobile ? { duration: 0.6 } : {}}
           />
         </div>
       )}
@@ -393,8 +402,8 @@ const Quiz = () => {
       {/* Footer Note */}
       <motion.div
         className="text-sm text-gray-400 mt-6"
-        animate={{ opacity: [0.8, 1, 0.8] }}
-        transition={{ repeat: Infinity, duration: 3 }}
+        animate={!isMobile ? { opacity: [0.8, 1, 0.8] } : {}}
+        transition={!isMobile ? { repeat: Infinity, duration: 3 } : {}}
       >
         ✨ Choose what resonates. Trust your vibe!
       </motion.div>

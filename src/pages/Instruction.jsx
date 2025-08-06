@@ -1,19 +1,30 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GeneratingQuiz from "../components/GeneratingQuiz";
 
 const Instruction = () => {
   const navigate = useNavigate();
   const [showGenerating, setShowGenerating] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const handleStart = () => {
-    localStorage.removeItem("clickmorale-quiz-progress"); // Reset saved quizonal: clear final result if you save it
-    setShowGenerating(true);                 // Show fun screen
+    localStorage.removeItem("clickmorale-quiz-progress"); // Reset saved quiz progress
+    setShowGenerating(true); // Show fun screen
     setTimeout(() => {
       navigate("/quiz");
     }, 3000);
   };
+
+  // Detect mobile devices
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   if (showGenerating) return <GeneratingQuiz />;
 
@@ -48,12 +59,12 @@ const Instruction = () => {
           <motion.span
             key={i}
             className={`absolute ${item.x} ${item.y}`}
-            animate={{ y: [0, -25, 0] }}
-            transition={{
+            animate={!isMobile ? { y: [0, -25, 0] } : {}}
+            transition={!isMobile ? {
               duration: 6 + i,
               repeat: Infinity,
               ease: "easeInOut",
-            }}
+            } : {}}
           >
             {item.icon}
           </motion.span>
@@ -62,9 +73,9 @@ const Instruction = () => {
 
       {/* Main Text */}
       <motion.h1
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.6 }}
+        initial={!isMobile ? { scale: 0.9, opacity: 0 } : {}}
+        animate={!isMobile ? { scale: 1, opacity: 1 } : { opacity: 1 }}
+        transition={!isMobile ? { duration: 0.6 } : {}}
         className="text-4xl sm:text-5xl font-bold text-yellow-300 mb-4 z-10"
       >
         Ready to Level Up Your Social Vibe? 🎮
@@ -85,8 +96,8 @@ const Instruction = () => {
 
       {/* Button to Start */}
       <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={!isMobile ? { scale: 1.1 } : {}}
+        whileTap={!isMobile ? { scale: 0.95 } : {}}
         onClick={handleStart}
         className="bg-yellow-400 text-black font-bold px-8 py-3 rounded-full shadow-lg hover:bg-yellow-300 transition z-10"
       >

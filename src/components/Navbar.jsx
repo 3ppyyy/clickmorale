@@ -1,10 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom"; // if using react-router
+import { useNavigate } from "react-router-dom";
+
+// Utility to detect mobile device
+const isMobileDevice = () =>
+  typeof window !== "undefined" && window.innerWidth <= 768;
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navigate = useNavigate(); // for programmatic navigation
+  const [isMobile, setIsMobile] = useState(isMobileDevice());
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(isMobileDevice());
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -16,31 +30,33 @@ const Navbar = () => {
 
   const handleStartQuiz = () => {
     setIsMenuOpen(false);
-    navigate("/instruction"); // adjust the route based on your routing setup
+    navigate("/instruction");
   };
 
+  const NavWrapper = isMobile ? "nav" : motion.nav;
+
   return (
-    <motion.nav
+    <NavWrapper
       className="fixed top-0 w-full z-50 bg-primary text-white px-6 py-4 shadow-lg"
-      initial={{ y: -50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      {...(!isMobile && {
+        initial: { y: -50, opacity: 0 },
+        animate: { y: 0, opacity: 1 },
+        transition: { duration: 0.6, ease: "easeOut" },
+      })}
     >
       <div className="max-w-6xl mx-auto flex justify-between items-center font-game relative">
         {/* Logo + Tagline */}
         <div className="flex flex-col">
-          <motion.a
+          <a
             href="#home"
             onClick={(e) => {
               e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
+              window.scrollTo({ top: 0, behavior: isMobile ? "auto" : "smooth" });
             }}
             className="text-2xl sm:text-3xl font-black flex items-center gap-2 text-yellow-300 cursor-pointer select-none"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
           >
             🎯 ClickMorale
-          </motion.a>
+          </a>
           <small className="text-yellow-100 text-xs sm:text-sm font-light -mt-1 select-none">
             Discover your social vibe
           </small>
@@ -49,30 +65,33 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-6">
           <ul className="flex space-x-6 text-sm sm:text-base font-semibold">
-            {menuItems.map((item) => (
-              <motion.li
-                key={item.name}
-                whileHover={{ scale: 1.15 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <a
-                  href={`#${item.id}`}
-                  className="hover:text-[#FEE440] transition duration-300 ease-in-out"
+            {menuItems.map((item) => {
+              const ItemWrapper = isMobile ? "li" : motion.li;
+              return (
+                <ItemWrapper
+                  key={item.name}
+                  {...(!isMobile && {
+                    whileHover: { scale: 1.15 },
+                    transition: { type: "spring", stiffness: 300 },
+                  })}
                 >
-                  {item.name}
-                </a>
-              </motion.li>
-            ))}
+                  <a
+                    href={`#${item.id}`}
+                    className="hover:text-[#FEE440] transition duration-300 ease-in-out"
+                  >
+                    {item.name}
+                  </a>
+                </ItemWrapper>
+              );
+            })}
           </ul>
 
-          {/* Start Quiz Button */}
-          <motion.button
+          <button
             onClick={handleStartQuiz}
-            whileHover={{ scale: 1.05 }}
             className="ml-4 bg-yellow-400 text-black font-bold px-4 py-2 rounded-full shadow hover:bg-yellow-300 transition"
           >
             🎮 Start Quiz
-          </motion.button>
+          </button>
         </div>
 
         {/* Fun Tagline */}
@@ -109,9 +128,9 @@ const Navbar = () => {
         {isMenuOpen && (
           <motion.div
             className="absolute top-full left-0 w-full bg-primary shadow-md md:hidden z-40"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
+            initial={isMobile ? false : { opacity: 0, y: -10 }}
+            animate={isMobile ? false : { opacity: 1, y: 0 }}
+            exit={isMobile ? false : { opacity: 0, y: -10 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
           >
             <ul className="text-center font-semibold text-sm py-4 space-y-3">
@@ -126,7 +145,6 @@ const Navbar = () => {
                   </a>
                 </li>
               ))}
-              {/* Start Quiz Button for Mobile */}
               <li>
                 <button
                   onClick={handleStartQuiz}
@@ -139,7 +157,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </NavWrapper>
   );
 };
 
